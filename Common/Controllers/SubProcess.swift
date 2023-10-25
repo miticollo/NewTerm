@@ -121,7 +121,8 @@ class SubProcess {
 		if let result = userPasswd?.pw_shell {
 			return String(cString: result)
 		}
-		return "/bin/bash"
+		return ["/var/jb/bin/zsh", "/bin/zsh", "/var/jb/bin/bash", "/bin/bash", "/var/jb/bin/sh"]
+			.first { (try? URL(fileURLWithPath: $0).checkResourceIsReachable()) == true } ?? "/bin/sh"
 	}
 
 	private static var homeDirectory: String {
