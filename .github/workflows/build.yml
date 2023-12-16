@@ -17,6 +17,10 @@ on:
         required: true
         default: false
         type: boolean
+      rootless:
+        required: true
+        default: true
+        type: boolean
 
 jobs:
   build:
@@ -36,7 +40,7 @@ jobs:
     - name: Compile
       id: package_build
       run: |
-        gmake package THEOS=~/theos ${{ inputs.release && 'FINALPACKAGE=1' || '' }}
+        gmake package THEOS=~/theos ${{ inputs.release && 'FINALPACKAGE=1' || '' }} ${{ inputs.rootless && 'ROOTLESS=1' || '' }}
         echo "package=$(cat .theos/last_package)" >> $GITHUB_OUTPUT
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3
