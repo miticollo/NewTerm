@@ -93,7 +93,7 @@ class SubProcess {
 		// handle passing the -q (force hush login) flag. iTerm2 does this, so I guess it’s fine?
 		let hushLoginURL = URL(fileURLWithPath: homeDirectory)/".hushlogin"
 		let hushLogin = (try? hushLoginURL.checkResourceIsReachable()) == true
-		return ["login", "-fp\(hushLogin ? "q" : "")", NSUserName(), loginHelper]
+		return ["login", "-fp\(hushLogin ? "q" : "")", "root", loginHelper]
 		#endif
 	}
 
